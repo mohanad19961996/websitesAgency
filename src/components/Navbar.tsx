@@ -8,6 +8,7 @@ export default function Navbar() {
   const [currentTheme, setCurrentTheme] = useState("purple");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
   const { language, setLanguage, isRTL } = useLanguage();
 
   const themes = [
@@ -139,6 +140,20 @@ export default function Navbar() {
       applyTheme(currentThemeObj);
     }
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isThemeDropdownOpen) {
+        setIsThemeDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isThemeDropdownOpen]);
 
   useEffect(() => {
     // Check for saved dark mode preference or system preference
@@ -292,23 +307,32 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:text-primary hover:shadow-sm h-7 rounded-md border border-transparent hover:border-primary/20"
+                  onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
+                  className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 active:bg-primary/10 transition-all duration-300 hover:text-primary active:text-primary hover:shadow-sm active:shadow-sm h-7 rounded-md border border-transparent hover:border-primary/20 active:border-primary/20"
                 >
-                  <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                  <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 group-active:scale-110 group-active:rotate-12" />
                   <span className="text-xs">{language === 'ar' ? 'المظهر' : 'Theme'}</span>
                 </Button>
                 
                 {/* Theme Dropdown */}
-                <div className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50`}>
+                <div className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg transition-all duration-300 transform z-50 ${
+                  isThemeDropdownOpen 
+                    ? 'opacity-100 visible translate-y-0' 
+                    : 'opacity-0 invisible translate-y-2'
+                } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}>
                   <div className="p-3 space-y-2">
                     {themes.map((theme) => (
                       <button
                         key={theme.id}
-                        onClick={() => applyTheme(theme)}
+                        onClick={() => {
+                          applyTheme(theme);
+                          setIsThemeDropdownOpen(false);
+                        }}
                         className={`
                           w-full flex items-center justify-between p-2 rounded-md transition-all duration-300 cursor-pointer
                           hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:scale-102 hover:shadow-sm hover:shadow-primary/5
-                          ${currentTheme === theme.id ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary shadow-sm' : 'hover:text-primary'}
+                          active:bg-gradient-to-r active:from-primary/10 active:to-primary/5 active:scale-102 active:shadow-sm active:shadow-primary/5
+                          ${currentTheme === theme.id ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary shadow-sm' : 'hover:text-primary active:text-primary'}
                         `}
                       >
                         <span className="text-xs font-medium">

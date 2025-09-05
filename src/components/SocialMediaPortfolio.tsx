@@ -316,7 +316,7 @@ export default function SocialMediaPortfolio() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {currentContent.designs.map((design, index) => (
             <AnimatedSection key={index} animation="fadeInUp" delay={300 + (index * 100)}>
-              <div className="group relative bg-card border-2 border-border rounded-xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 cursor-pointer h-full">
+              <div className="group relative bg-card border-2 border-border rounded-xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:-translate-y-3 active:border-primary/30 active:shadow-2xl active:-translate-y-3 transition-all duration-500 cursor-pointer h-full touch-manipulation">
                 
                 {/* Design Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -330,9 +330,9 @@ export default function SocialMediaPortfolio() {
                       "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBjb250ZW50JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                     }
                     alt={design.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 group-active:scale-110 transition-transform duration-700"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${design.color} opacity-60 group-hover:opacity-40 transition-opacity duration-500`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${design.color} opacity-60 group-hover:opacity-40 group-active:opacity-40 transition-opacity duration-500`}></div>
                   
                   {/* Platform Badge */}
                   <div className="absolute top-3 left-3">
@@ -357,7 +357,7 @@ export default function SocialMediaPortfolio() {
                   {/* Play Button for Video Content */}
                   {design.platform === 'YouTube' && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 group-active:scale-110 transition-transform duration-300">
                         <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
                       </div>
                     </div>
