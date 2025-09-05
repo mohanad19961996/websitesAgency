@@ -8,6 +8,7 @@ import WebsiteBenefits from "./components/WebsiteBenefits";
 import OurServices from "./components/OurServices";
 import ProjectsPortfolio from "./components/ProjectsPortfolio";
 import SocialMediaPortfolio from "./components/SocialMediaPortfolio";
+import WorkflowSteps from "./components/WorkflowSteps";
 import ContactUs from "./components/ContactUs";
 import SectionDivider from "./components/SectionDivider";
 import { LanguageProvider } from "./components/LanguageContext";
@@ -49,8 +50,8 @@ function AppContent() {
 
         <SectionDivider variant="gradient" />
 
-        <div id="social-media">
-          <SocialMediaPortfolio />
+        <div id="workflow">
+          <WorkflowSteps />
         </div>
 
         <SectionDivider variant="line" />

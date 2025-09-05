@@ -197,7 +197,7 @@ export default function Navbar() {
     }
 
     const handleScroll = () => {
-      const sections = ["hero", "problems", "benefits", "services", "portfolio", "contact"];
+      const sections = ["hero", "problems", "benefits", "services", "portfolio", "gallery", "workflow", "contact"];
       const scrollPosition = window.scrollY + 100; // Offset for navbar height
 
       for (const sectionId of sections) {
@@ -238,6 +238,10 @@ export default function Navbar() {
     { 
       id: "portfolio", 
       label: language === 'ar' ? "أعمالنا" : "Portfolio" 
+    },
+    { 
+      id: "workflow", 
+      label: language === 'ar' ? "خطوات العمل" : "Workflow" 
     },
   ];
 

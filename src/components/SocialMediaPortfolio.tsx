@@ -1,295 +1,113 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AnimatedSection } from './AnimatedSection';
 import { useLanguage } from './LanguageContext';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { 
-  Heart, 
-  MessageCircle, 
-  Share2, 
-  Eye,
-  TrendingUp,
-  Instagram,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Youtube,
   Palette,
-  ArrowRight,
-  Play,
-  Users,
-  Zap
+  Eye,
+  ExternalLink
 } from 'lucide-react';
 
 export default function SocialMediaPortfolio() {
   const { language } = useLanguage();
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-
-  // Mobile detection
-  useEffect(() => {
-    const checkIsMobile = () => {
-      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                            window.innerWidth <= 768 || 
-                            ('ontouchstart' in window);
-      setIsMobile(isMobileDevice);
-    };
-    
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const content = {
     ar: {
-      badge: "أعمال التصميم",
-      title: "معرض تصاميم وسائل التواصل الاجتماعي",
-      subtitle: "مجموعة مختارة من تصاميمنا الإبداعية لوسائل التواصل الاجتماعي التي حققت نجاحاً وتفاعلاً واسعاً",
-      categories: [
-        { name: "الكل", value: "all" },
-        { name: "انستقرام", value: "instagram" },
-        { name: "فيسبوك", value: "facebook" },
-        { name: "لينكد إن", value: "linkedin" },
-        { name: "يوتيوب", value: "youtube" }
-      ],
-      designs: [
+      badge: "معرض الأعمال",
+      title: "معرض أعمالنا",
+      subtitle: "مجموعة مختارة من أفضل تصاميمنا وأعمالنا الإبداعية",
+      galleryImages: [
         {
-          title: "حملة العلامة التجارية للأزياء",
-          description: "تصاميم متكاملة لحملة إطلاق مجموعة أزياء جديدة",
-          platform: "Instagram",
-          category: "instagram",
-          image: "fashion brand campaign",
-          metrics: {
-            likes: "45K",
-            comments: "2.3K",
-            shares: "890",
-            reach: "120K"
-          },
-          engagement: "8.5%",
-          icon: Instagram,
-          color: "from-pink-500 to-purple-500",
-          tags: ["أزياء", "علامة تجارية", "إبداعي"]
+          title: "تصميم هوية بصرية",
+          category: "تصميم",
+          image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGlkZW50aXR5JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "محتوى تقني تفاعلي",
-          description: "سلسلة تصاميم تقنية تعليمية مع رسوم بيانية متحركة",
-          platform: "LinkedIn",
-          category: "linkedin",
-          image: "tech educational content",
-          metrics: {
-            likes: "12K",
-            comments: "850",
-            shares: "1.2K",
-            reach: "85K"
-          },
-          engagement: "12.8%",
-          icon: Linkedin,
-          color: "from-blue-600 to-cyan-500",
-          tags: ["تقنية", "تعليمي", "احترافي"]
+          title: "تصميم مواقع ويب",
+          category: "ويب",
+          image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ258ZW58MXx8fHwxNzU3MDU4NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "حملة طعام وضيافة",
-          description: "تصاميم شهية لمطعم فاخر مع تصوير احترافي للأطباق",
-          platform: "Facebook",
-          category: "facebook",
-          image: "restaurant food campaign",
-          metrics: {
-            likes: "28K",
-            comments: "1.8K",
-            shares: "650",
-            reach: "95K"
-          },
-          engagement: "9.2%",
-          icon: Facebook,
-          color: "from-orange-500 to-red-500",
-          tags: ["طعام", "مطاعم", "فوتوغرافيا"]
+          title: "تطبيقات الجوال",
+          category: "تطبيقات",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHB8ZW58MXx8fHwxNzU3MDU4NDU3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "فيديو موشن جرافيك",
-          description: "فيديو ترويجي متحرك لشركة تكنولوجيا مع تأثيرات بصرية مذهلة",
-          platform: "YouTube",
-          category: "youtube",
-          image: "motion graphics video",
-          metrics: {
-            likes: "8.5K",
-            comments: "420",
-            shares: "380",
-            reach: "150K"
-          },
-          engagement: "15.3%",
-          icon: Youtube,
-          color: "from-red-500 to-pink-500",
-          tags: ["موشن", "فيديو", "تكنولوجيا"]
+          title: "تصميم جرافيكي",
+          category: "جرافيك",
+          image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ2MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "هوية بصرية متكاملة",
-          description: "تطوير هوية بصرية شاملة لشركة ناشئة مع دليل الاستخدام",
-          platform: "Instagram",
-          category: "instagram",
-          image: "brand identity design",
-          metrics: {
-            likes: "32K",
-            comments: "1.5K",
-            shares: "720",
-            reach: "110K"
-          },
-          engagement: "11.4%",
-          icon: Instagram,
-          color: "from-purple-500 to-indigo-500",
-          tags: ["هوية بصرية", "شركات ناشئة", "احترافي"]
+          title: "تصوير منتجات",
+          category: "تصوير",
+          image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBjb250ZW50JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "محتوى تسويقي إبداعي",
-          description: "حملة تسويقية إبداعية لمنتج تقني مع رسائل تفاعلية",
-          platform: "Facebook",
-          category: "facebook",
-          image: "creative marketing content",
-          metrics: {
-            likes: "19K",
-            comments: "980",
-            shares: "540",
-            reach: "75K"
-          },
-          engagement: "10.1%",
-          icon: Facebook,
-          color: "from-green-500 to-teal-500",
-          tags: ["تسويق", "إبداعي", "تقني"]
+          title: "موشن جرافيك",
+          category: "فيديو",
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3Rpb24lMjBncmFwaGljcyUyMHZpZGVvfGVufDF8fHx8MTc1NzA1ODQ0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        },
+        {
+          title: "التجارة الإلكترونية",
+          category: "ويب",
+          image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2V8ZW58MXx8fHwxNzU3MDU4NDY1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        },
+        {
+          title: "حلول رقمية",
+          category: "تقنية",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29udGVudCUyMGRlc2lnbnxlbnwxfHx8fDE3NTcwNTg0NDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         }
       ],
-      viewDesign: "مشاهدة التصميم",
-      allWork: "مشاهدة جميع الأعمال",
-      metrics: {
-        likes: "إعجاب",
-        comments: "تعليق",
-        shares: "مشاركة",
-        reach: "وصول",
-        engagement: "تفاعل"
-      }
+      viewProject: "عرض المشروع"
     },
     en: {
-      badge: "Design Work",
-      title: "Social Media Design Portfolio",
-      subtitle: "A curated collection of our creative social media designs that achieved wide success and engagement",
-      categories: [
-        { name: "All", value: "all" },
-        { name: "Instagram", value: "instagram" },
-        { name: "Facebook", value: "facebook" },
-        { name: "LinkedIn", value: "linkedin" },
-        { name: "YouTube", value: "youtube" }
-      ],
-      designs: [
+      badge: "Portfolio Gallery",
+      title: "Our Portfolio",
+      subtitle: "A curated selection of our best creative works and designs",
+      galleryImages: [
         {
-          title: "Fashion Brand Campaign",
-          description: "Complete designs for launching a new fashion collection campaign",
-          platform: "Instagram",
-          category: "instagram",
-          image: "fashion brand campaign",
-          metrics: {
-            likes: "45K",
-            comments: "2.3K",
-            shares: "890",
-            reach: "120K"
-          },
-          engagement: "8.5%",
-          icon: Instagram,
-          color: "from-pink-500 to-purple-500",
-          tags: ["Fashion", "Branding", "Creative"]
+          title: "Brand Identity Design",
+          category: "Design",
+          image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGlkZW50aXR5JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "Interactive Tech Content",
-          description: "Educational tech design series with animated infographics",
-          platform: "LinkedIn",
-          category: "linkedin",
-          image: "tech educational content",
-          metrics: {
-            likes: "12K",
-            comments: "850",
-            shares: "1.2K",
-            reach: "85K"
-          },
-          engagement: "12.8%",
-          icon: Linkedin,
-          color: "from-blue-600 to-cyan-500",
-          tags: ["Tech", "Educational", "Professional"]
+          title: "Website Design",
+          category: "Web",
+          image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ258ZW58MXx8fHwxNzU3MDU4NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "Food & Hospitality Campaign",
-          description: "Appetizing designs for luxury restaurant with professional food photography",
-          platform: "Facebook",
-          category: "facebook",
-          image: "restaurant food campaign",
-          metrics: {
-            likes: "28K",
-            comments: "1.8K",
-            shares: "650",
-            reach: "95K"
-          },
-          engagement: "9.2%",
-          icon: Facebook,
-          color: "from-orange-500 to-red-500",
-          tags: ["Food", "Restaurant", "Photography"]
+          title: "Mobile Applications",
+          category: "Apps",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHB8ZW58MXx8fHwxNzU3MDU4NDU3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "Motion Graphics Video",
-          description: "Promotional animated video for tech company with stunning visual effects",
-          platform: "YouTube",
-          category: "youtube",
-          image: "motion graphics video",
-          metrics: {
-            likes: "8.5K",
-            comments: "420",
-            shares: "380",
-            reach: "150K"
-          },
-          engagement: "15.3%",
-          icon: Youtube,
-          color: "from-red-500 to-pink-500",
-          tags: ["Motion", "Video", "Technology"]
+          title: "Graphic Design",
+          category: "Graphics",
+          image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ2MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "Complete Brand Identity",
-          description: "Comprehensive visual identity development for startup with usage guidelines",
-          platform: "Instagram",
-          category: "instagram",
-          image: "brand identity design",
-          metrics: {
-            likes: "32K",
-            comments: "1.5K",
-            shares: "720",
-            reach: "110K"
-          },
-          engagement: "11.4%",
-          icon: Instagram,
-          color: "from-purple-500 to-indigo-500",
-          tags: ["Brand Identity", "Startup", "Professional"]
+          title: "Product Photography",
+          category: "Photography",
+          image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBjb250ZW50JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         },
         {
-          title: "Creative Marketing Content",
-          description: "Creative marketing campaign for tech product with interactive messages",
-          platform: "Facebook",
-          category: "facebook",
-          image: "creative marketing content",
-          metrics: {
-            likes: "19K",
-            comments: "980",
-            shares: "540",
-            reach: "75K"
-          },
-          engagement: "10.1%",
-          icon: Facebook,
-          color: "from-green-500 to-teal-500",
-          tags: ["Marketing", "Creative", "Tech"]
+          title: "Motion Graphics",
+          category: "Video",
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3Rpb24lMjBncmFwaGljcyUyMHZpZGVvfGVufDF8fHx8MTc1NzA1ODQ0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        },
+        {
+          title: "E-commerce Solutions",
+          category: "Web",
+          image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2V8ZW58MXx8fHwxNzU3MDU4NDY1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        },
+        {
+          title: "Digital Solutions",
+          category: "Technology",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29udGVudCUyMGRlc2lnbnxlbnwxfHx8fDE3NTcwNTg0NDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         }
       ],
-      viewDesign: "View Design",
-      allWork: "View All Work",
-      metrics: {
-        likes: "Likes",
-        comments: "Comments",
-        shares: "Shares",
-        reach: "Reach",
-        engagement: "Engagement"
-      }
+      viewProject: "View Project"
     }
   };
 
@@ -329,129 +147,39 @@ export default function SocialMediaPortfolio() {
           </AnimatedSection>
         </div>
 
-        {/* Designs Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          {currentContent.designs.map((design, index) => (
+        {/* Photo Gallery */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {currentContent.galleryImages.map((image, index) => (
             <AnimatedSection key={index} animation="fadeInUp" delay={300 + (index * 100)}>
               <div 
-                className={`${isMobile ? '' : 'group'} relative bg-card border-2 border-border rounded-xl overflow-hidden transition-all duration-500 cursor-pointer h-full touch-manipulation ${
-                  isMobile 
-                    ? (activeCard === index ? 'border-primary/30 shadow-2xl -translate-y-3' : 'border-border hover:border-primary/30 hover:shadow-2xl hover:-translate-y-3')
-                    : 'hover:border-primary/30 hover:shadow-2xl hover:-translate-y-3'
-                }`}
-                onClick={isMobile ? () => setActiveCard(activeCard === index ? null : index) : undefined}
+                className="group relative bg-card border border-border rounded-xl overflow-hidden transition-all duration-500 cursor-pointer hover:border-primary/30 hover:shadow-lg hover:-translate-y-2"
+                onClick={() => setSelectedImage(selectedImage === index ? null : index)}
               >
-                
-                {/* Design Image */}
-                <div className="relative h-48 overflow-hidden">
+                {/* Image */}
+                <div className="relative aspect-square overflow-hidden">
                   <ImageWithFallback 
-                    src={
-                      index === 0 ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwY2FtcGFpZ24lMjBkZXNpZ258ZW58MXx8fHwxNzU3MDU4NDM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 1 ? "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29udGVudCUyMGRlc2lnbnxlbnwxfHx8fDE3NTcwNTg0NDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 2 ? "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwZm9vZCUyMGRlc2lnbnxlbnwxfHx8fDE3NTcwNTg0NDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 3 ? "https://images.unsplash.com/photo-1611224923853-80b023f02d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3Rpb24lMjBncmFwaGljcyUyMHZpZGVvfGVufDF8fHx8MTc1NzA1ODQ0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 4 ? "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGlkZW50aXR5JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBjb250ZW50JTIwZGVzaWdufGVufDF8fHx8MTc1NzA1ODQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                    }
-                    alt={design.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${
-                      isMobile 
-                        ? (activeCard === index ? 'scale-110' : 'scale-100')
-                        : 'group-hover:scale-110'
-                    }`}
+                    src={image.image}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${design.color} transition-opacity duration-500 ${
-                    isMobile 
-                      ? (activeCard === index ? 'opacity-40' : 'opacity-60')
-                      : 'opacity-60 group-hover:opacity-40'
-                  }`}></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  {/* Platform Badge */}
-                  <div className="absolute top-3 left-3">
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
-                      <design.icon className="w-3.5 h-3.5 text-white" />
-                      <span className="text-xs font-medium text-white">
-                        {design.platform}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Engagement Badge */}
-                  <div className="absolute top-3 right-3">
-                    <div className="flex items-center gap-1 px-2 py-1 bg-green-500/20 backdrop-blur-sm rounded-full">
-                      <TrendingUp className="w-3 h-3 text-green-400" />
-                      <span className="text-xs font-medium text-white">
-                        {design.engagement}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Play Button for Video Content */}
-                  {design.platform === 'YouTube' && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className={`w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform duration-300 ${
-                        isMobile 
-                          ? (activeCard === index ? 'scale-110' : 'scale-100')
-                          : 'group-hover:scale-110'
-                      }`}>
-                        <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className={`p-5 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {/* Design Title */}
-                  <div className="mb-2">
-                    <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors heading-elegant-underline leading-tight">
-                      {design.title}
+                  {/* Overlay Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="text-xs font-medium text-primary bg-primary/10 backdrop-blur-sm px-2 py-1 rounded-full mb-2 w-fit">
+                      {image.category}
+                    </span>
+                    <h3 className="text-sm font-medium text-white mb-2 leading-tight">
+                      {image.title}
                     </h3>
-                  </div>
-                  
-                  <p className="text-foreground text-sm mb-4 leading-relaxed line-clamp-2">
-                    {design.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="mb-4">
-                    <div className="flex flex-wrap gap-1.5">
-                      {design.tags.map((tag, tagIndex) => (
-                        <span key={tagIndex} className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-md font-medium">
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="flex items-center gap-2">
+                      <Eye className="w-3 h-3 text-white" />
+                      <ExternalLink className="w-3 h-3 text-white" />
                     </div>
-                  </div>
-
-                  {/* Metrics */}
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="bg-muted/50 rounded-lg py-2 px-2 text-center">
-                      <div className="flex items-center justify-center gap-1 mb-1">
-                        <Heart className="w-3 h-3 text-red-500" />
-                        <span className="text-xs font-medium text-foreground">{design.metrics.likes}</span>
-                      </div>
-                      <div className="text-xs text-foreground/60">{currentContent.metrics.likes}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg py-2 px-2 text-center">
-                      <div className="flex items-center justify-center gap-1 mb-1">
-                        <Eye className="w-3 h-3 text-blue-500" />
-                        <span className="text-xs font-medium text-foreground">{design.metrics.reach}</span>
-                      </div>
-                      <div className="text-xs text-foreground/60">{currentContent.metrics.reach}</div>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="flex gap-2">
-                    <button className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 hover:scale-105 transition-all duration-300 text-sm">
-                      <span>{currentContent.viewDesign}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
                   </div>
                 </div>
 
-                {/* Hover Effect Overlay */}
+                {/* Hover Border Effect */}
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-xl transition-all duration-500 pointer-events-none"></div>
               </div>
             </AnimatedSection>
