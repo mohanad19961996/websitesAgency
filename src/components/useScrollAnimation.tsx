@@ -18,8 +18,30 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   const elementRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768 || 
+                            ('ontouchstart' in window);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   useEffect(() => {
+    // Skip animation setup on mobile devices
+    if (isMobile) {
+      setIsVisible(true);
+      return;
+    }
+
     const element = elementRef.current;
     if (!element) return;
 
@@ -50,7 +72,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     return () => {
       observer.unobserve(element);
     };
-  }, [threshold, rootMargin, triggerOnce, delay, hasAnimated]);
+  }, [threshold, rootMargin, triggerOnce, delay, hasAnimated, isMobile]);
 
   return { ref: elementRef, isVisible, hasAnimated };
 }

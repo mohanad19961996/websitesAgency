@@ -1,5 +1,6 @@
 import React from 'react';
 import { useScrollAnimation, scrollAnimations, AnimationType } from './useScrollAnimation';
+import { useState, useEffect } from 'react';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -20,23 +21,39 @@ export function AnimatedSection({
 }: AnimatedSectionProps) {
   const { ref, isVisible } = useScrollAnimation({ delay });
   const animationConfig = scrollAnimations[animation];
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768 || 
+                            ('ontouchstart' in window);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   if (staggerChildren) {
     return (
       <div 
         ref={ref}
         className={`${animationConfig.transition} ${className} ${
-          isVisible ? animationConfig.animate : animationConfig.initial
+          isMobile ? animationConfig.animate : (isVisible ? animationConfig.animate : animationConfig.initial)
         }`}
       >
         {React.Children.map(children, (child, index) => (
           <div
             key={index}
             className={`${animationConfig.transition} ${
-              isVisible ? animationConfig.animate : animationConfig.initial
+              isMobile ? animationConfig.animate : (isVisible ? animationConfig.animate : animationConfig.initial)
             }`}
             style={{
-              transitionDelay: isVisible ? `${index * staggerDelay}ms` : '0ms'
+              transitionDelay: isMobile ? '0ms' : (isVisible ? `${index * staggerDelay}ms` : '0ms')
             }}
           >
             {child}
@@ -50,7 +67,7 @@ export function AnimatedSection({
     <div 
       ref={ref}
       className={`${animationConfig.transition} ${className} ${
-        isVisible ? animationConfig.animate : animationConfig.initial
+        isMobile ? animationConfig.animate : (isVisible ? animationConfig.animate : animationConfig.initial)
       }`}
     >
       {children}
