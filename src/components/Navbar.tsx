@@ -9,7 +9,23 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { language, setLanguage, isRTL } = useLanguage();
+
+  // Mobile detection
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768 || 
+                            ('ontouchstart' in window);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   const themes = [
     {
@@ -303,11 +319,11 @@ export default function Navbar() {
 
             {/* Theme Selector - Visible on all screens */}
             <div className="relative">
-              <div className="group">
+              <div className={isMobile ? '' : 'group'}>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
+                  onClick={isMobile ? () => setIsThemeDropdownOpen(!isThemeDropdownOpen) : undefined}
                   className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 active:bg-primary/10 transition-all duration-300 hover:text-primary active:text-primary hover:shadow-sm active:shadow-sm h-7 rounded-md border border-transparent hover:border-primary/20 active:border-primary/20"
                 >
                   <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 group-active:scale-110 group-active:rotate-12" />
@@ -316,10 +332,10 @@ export default function Navbar() {
                 
                 {/* Theme Dropdown */}
                 <div className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg transition-all duration-300 transform z-50 ${
-                  isThemeDropdownOpen 
-                    ? 'opacity-100 visible translate-y-0' 
-                    : 'opacity-0 invisible translate-y-2'
-                } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}>
+                  isMobile
+                    ? (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2')
+                    : (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0')
+                }`}>
                   <div className="p-3 space-y-2">
                     {themes.map((theme) => (
                       <button
