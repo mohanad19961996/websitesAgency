@@ -207,7 +207,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 justify-between">
           {/* Logo - Left Side */}
-          <div className="flex items-center w-1/4">
+          <div className="flex items-center flex-shrink-0">
             <div 
               className="flex-shrink-0 cursor-pointer"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
@@ -223,50 +223,48 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Navigation Links - Perfect Center */}
-          <div className="flex justify-center w-1/2">
-            <div className="hidden md:block">
-              <div className="flex items-center justify-center space-x-1">
-                {navItems.map((item) => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`
-                      relative px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium cursor-pointer
-                      hover:bg-gradient-to-br hover:from-primary/10 hover:to-primary/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10
-                      ${activeSection === item.id 
-                        ? 'text-primary bg-gradient-to-br from-primary/8 to-primary/12 shadow-sm border border-primary/20' 
-                        : 'text-muted-foreground hover:text-primary hover:scale-105'
-                      }
-                    `}
-                  >
-                    {/* Active section indicator */}
-                    {activeSection === item.id && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-lg -z-10 animate-pulse"></div>
-                    )}
-                    
-                    {item.label}
-                    
-                    {/* Active section bottom border */}
-                    {activeSection === item.id && (
-                      <div 
-                        className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary/70 rounded-full"
-                        style={{
-                          bottom: '-2px',
-                          width: '60%',
-                          height: '2px'
-                        }}
-                      ></div>
-                    )}
-                  </a>
-                ))}
-              </div>
+          {/* Navigation Links - Hidden on mobile, shown on md+ */}
+          <div className="hidden md:flex justify-center flex-1 mx-8">
+            <div className="flex items-center justify-center space-x-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`
+                    relative px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium cursor-pointer
+                    hover:bg-gradient-to-br hover:from-primary/10 hover:to-primary/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10
+                    ${activeSection === item.id 
+                      ? 'text-primary bg-gradient-to-br from-primary/8 to-primary/12 shadow-sm border border-primary/20' 
+                      : 'text-muted-foreground hover:text-primary hover:scale-105'
+                    }
+                  `}
+                >
+                  {/* Active section indicator */}
+                  {activeSection === item.id && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-lg -z-10 animate-pulse"></div>
+                  )}
+                  
+                  {item.label}
+                  
+                  {/* Active section bottom border */}
+                  {activeSection === item.id && (
+                    <div 
+                      className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary/70 rounded-full"
+                      style={{
+                        bottom: '-2px',
+                        width: '60%',
+                        height: '2px'
+                      }}
+                    ></div>
+                  )}
+                </a>
+              ))}
             </div>
           </div>
           
           {/* Right side buttons - Language, Theme and CTA */}
-          <div className={`flex items-center justify-end w-1/4 ${isRTL ? 'space-x-reverse space-x-1' : 'space-x-1'}`}>
+          <div className={`flex items-center justify-end flex-shrink-0 ${isRTL ? 'space-x-reverse space-x-1' : 'space-x-1'}`}>
             {/* Language Toggle - Hidden only on smallest screens */}
             <div className="hidden sm:block">
               <Button
@@ -288,8 +286,8 @@ export default function Navbar() {
               </Button>
             </div>
 
-            {/* Theme Selector - Hidden only on smallest screens */}
-            <div className="hidden sm:block relative">
+            {/* Theme Selector - Visible on all screens */}
+            <div className="relative">
               <div className="group">
                 <Button
                   variant="ghost"
@@ -365,8 +363,8 @@ export default function Navbar() {
 
 
             
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+            {/* Mobile menu button - Always visible on mobile */}
+            <div className="md:hidden ml-2">
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -381,7 +379,7 @@ export default function Navbar() {
       </div>
       
       {/* Mobile Navigation Menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-background/95 backdrop-blur-md border-b border-border/50`}>
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-background/95 backdrop-blur-md border-b border-border/50`}>
         <div className="px-4 py-4 space-y-2">
           {navItems.map((item) => (
             <a
