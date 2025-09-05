@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { ChevronDown, Moon, Sun, Globe, Palette, Menu } from "lucide-react";
@@ -160,7 +161,14 @@ export default function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isThemeDropdownOpen) {
+      const target = event.target as HTMLElement;
+      const themeButton = document.querySelector('[data-theme-button]');
+      const themeDropdown = document.querySelector('[data-theme-dropdown]');
+      
+      // Don't close if clicking on the theme button or dropdown
+      if (isThemeDropdownOpen && 
+          !themeButton?.contains(target) && 
+          !themeDropdown?.contains(target)) {
         setIsThemeDropdownOpen(false);
       }
     };
@@ -323,7 +331,8 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={isMobile ? () => setIsThemeDropdownOpen(!isThemeDropdownOpen) : undefined}
+                  data-theme-button
+                  onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
                   className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 active:bg-primary/10 transition-all duration-300 hover:text-primary active:text-primary hover:shadow-sm active:shadow-sm h-7 rounded-md border border-transparent hover:border-primary/20 active:border-primary/20"
                 >
                   <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 group-active:scale-110 group-active:rotate-12" />
@@ -331,11 +340,14 @@ export default function Navbar() {
                 </Button>
                 
                 {/* Theme Dropdown */}
-                <div className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg transition-all duration-300 transform z-50 ${
-                  isMobile
-                    ? (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2')
-                    : (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0')
-                }`}>
+                <div 
+                  data-theme-dropdown
+                  className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg transition-all duration-300 transform z-50 ${
+                    isMobile
+                      ? (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2')
+                      : 'opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0'
+                  }`}
+                >
                   <div className="p-3 space-y-2">
                     {themes.map((theme) => (
                       <button

@@ -1,3 +1,4 @@
+import React from 'react';
 import { AnimatedSection } from './AnimatedSection';
 import { useLanguage } from './LanguageContext';
 import { Card } from './ui/card';
@@ -13,9 +14,37 @@ import {
   ArrowRight,
   Star
 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function WebsiteBenefits() {
   const { language } = useLanguage();
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768 || 
+                            ('ontouchstart' in window);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  const handleCardClick = (index: number) => {
+    if (isMobile) {
+      setFlippedCards(prev => 
+        prev.includes(index) 
+          ? prev.filter(i => i !== index)
+          : [...prev, index]
+      );
+    }
+  };
 
   const content = {
     ar: {
@@ -386,9 +415,14 @@ export default function WebsiteBenefits() {
               <div 
                 className="perspective-1000 h-full group cursor-pointer"
                 style={{ height: '420px' }}
+                onClick={() => handleCardClick(index)}
               >
                 <div 
-                  className="relative w-full h-full transition-transform duration-700 transform-gpu group-hover:rotate-y-180 hover:scale-[1.02] transition-all"
+                  className={`relative w-full h-full transition-transform duration-700 transform-gpu hover:scale-[1.02] transition-all ${
+                    isMobile 
+                      ? (flippedCards.includes(index) ? 'rotate-y-180' : '')
+                      : 'group-hover:rotate-y-180'
+                  }`}
                   style={{
                     transformStyle: 'preserve-3d',
                   }}
@@ -441,13 +475,24 @@ export default function WebsiteBenefits() {
                         {benefit.description}
                       </p>
 
-                      {/* Hover indicator */}
+                      {/* Tap/Hover indicator */}
                       <div className="flex items-center justify-center">
-                        <div className="flex items-center gap-2 text-primary/70 px-4 py-2 bg-primary/8 rounded-full border border-primary/20 hover:bg-primary/12 hover:border-primary/30 transition-all group-hover:scale-105">
+                        <div className={`flex items-center gap-2 text-primary/70 px-4 py-2 bg-primary/8 rounded-full border border-primary/20 hover:bg-primary/12 hover:border-primary/30 transition-all ${
+                          isMobile 
+                            ? (flippedCards.includes(index) ? 'scale-105 bg-primary/12 border-primary/30' : '')
+                            : 'group-hover:scale-105'
+                        }`}>
                           <span className="text-xs font-medium">
-                            {language === 'ar' ? 'مرر للتفاصيل' : 'Hover for Details'}
+                            {language === 'ar' 
+                              ? (isMobile ? 'اضغط للتفاصيل' : 'مرر للتفاصيل')
+                              : (isMobile ? 'Tap for Details' : 'Hover for Details')
+                            }
                           </span>
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className={`w-3 h-3 transition-transform ${
+                            isMobile 
+                              ? (flippedCards.includes(index) ? 'translate-x-1' : '')
+                              : 'group-hover:translate-x-1'
+                          }`} />
                         </div>
                       </div>
                     </div>
