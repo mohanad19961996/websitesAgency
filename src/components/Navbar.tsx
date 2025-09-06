@@ -260,7 +260,7 @@ export default function Navbar() {
                   <div className="w-2 h-2 bg-primary-foreground rounded-sm transition-all duration-300 group-hover:scale-125"></div>
                 </div>
                 <span className="text-base font-medium text-foreground tracking-tight transition-all duration-300 group-hover:text-primary group-hover:scale-105">
-                  Elegant
+                  Future Web
                 </span>
               </div>
             </div>
