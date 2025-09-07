@@ -14,7 +14,7 @@ export default function TemplatesShowcase() {
       description: language === 'ar' 
         ? "متجر إلكتروني عصري وأنيق لبيع الزهور، مصمم لعرض تنسيقات الزهور المذهلة وتوفير تجربة تسوق سلسة."
         : "A beautiful and modern online store for a flower boutique, designed to showcase stunning floral arrangements and provide a seamless shopping experience.",
-      image: "/public/images/flowers.png",
+      image: "/images/flowers.png",
       techStack: ["React", "Next.js", "Tailwind CSS"],
       color: "from-pink-400 to-rose-400",
       preview: "https://flowers-website-alpha.vercel.app/",
@@ -27,7 +27,7 @@ export default function TemplatesShowcase() {
       description: language === 'ar'
         ? "منصة متكاملة لحجز الجولات السياحية والفنادق مع واجهة سهلة الاستخدام لعرض الوجهات السياحية المميزة والعروض الحصرية"
         : "A comprehensive platform for booking tours and hotels with an easy-to-use interface to showcase featured destinations and exclusive offers",
-      image: "/public/images/tourist.png",
+      image: "/images/tourist.png",
       techStack: ["Next.js", "Node.js", "MongoDB"],
       color: "from-blue-500 to-cyan-400",
       preview: "#",
