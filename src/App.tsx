@@ -12,6 +12,7 @@ import WorkflowSteps from "./components/WorkflowSteps";
 import ContactUs from "./components/ContactUs";
 import SectionDivider from "./components/SectionDivider";
 import { LanguageProvider } from "./components/LanguageContext";
+import TemplatesShowcase from "./components/TemplatesShowcase";
 
 function AppContent() {
   return (
@@ -40,6 +41,11 @@ function AppContent() {
 
         <div id="services">
           <OurServices />
+        </div>
+
+        <SectionDivider variant="dots" />
+        <div id="templates">
+          <TemplatesShowcase />
         </div>
 
         <SectionDivider variant="dots" />

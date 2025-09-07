@@ -13,12 +13,10 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const { language, setLanguage, isRTL } = useLanguage();
 
-  // Mobile detection
+  // Mobile/Tablet detection - only for tablets and phones
   useEffect(() => {
     const checkIsMobile = () => {
-      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                            window.innerWidth <= 768 || 
-                            ('ontouchstart' in window);
+      const isMobileDevice = window.innerWidth < 768; // Changed to 768px for tablets and phones only
       setIsMobile(isMobileDevice);
     };
     
@@ -142,9 +140,6 @@ export default function Navbar() {
     const newDarkMode = !isDarkMode;
     setIsDarkMode(newDarkMode);
     
-    // Save preference to localStorage
-    localStorage.setItem('darkMode', newDarkMode.toString());
-    
     if (newDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -181,9 +176,8 @@ export default function Navbar() {
 
   useEffect(() => {
     // Check for saved dark mode preference or system preference
-    const savedDarkMode = localStorage.getItem('darkMode');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldUseDark = savedDarkMode ? savedDarkMode === 'true' : prefersDark;
+    const shouldUseDark = prefersDark;
     
     setIsDarkMode(shouldUseDark);
     if (shouldUseDark) {
@@ -219,119 +213,103 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { 
-      id: "hero", 
-      label: language === 'ar' ? "الرئيسية" : "Home" 
-    },
-    { 
-      id: "problems", 
-      label: language === 'ar' ? "المشاكل والحلول" : "Solutions" 
-    },
-    { 
-      id: "benefits", 
-      label: language === 'ar' ? "الفوائد" : "Benefits" 
-    },
-    { 
-      id: "services", 
-      label: language === 'ar' ? "خدماتنا" : "Services" 
-    },
-    { 
-      id: "portfolio", 
-      label: language === 'ar' ? "أعمالنا" : "Portfolio" 
-    },
-    { 
-      id: "workflow", 
-      label: language === 'ar' ? "خطوات العمل" : "Workflow" 
-    },
+    { id: "hero", label: language === 'ar' ? "الرئيسية" : "Home" },
+    { id: "problems", label: language === 'ar' ? "المشاكل" : "Problems" },
+    { id: "benefits", label: language === 'ar' ? "المميزات" : "Benefits" },
+    { id: "services", label: language === 'ar' ? "خدماتنا" : "Services" },
+    { id: "templates", label: language === 'ar' ? "القوالب" : "Templates" },
+    { id: "portfolio", label: language === 'ar' ? "معرض الأعمال" : "Portfolio" },
+    { id: "workflow", label: language === 'ar' ? "خطوات العمل" : "Workflow" },
+    { id: "contact", label: language === 'ar' ? "اتصل بنا" : "Contact" }
   ];
 
   return (
     <nav className="fixed top-1 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16 justify-between">
-          {/* Logo - Left Side */}
-          <div className="flex items-center flex-shrink-0">
+      <div className="w-full px-4 sm:px-6">
+        <div className="flex items-center h-16">
+          {/* Logo - Fixed to left edge */}
+          <div className="flex-shrink-0">
             <div 
-              className="flex-shrink-0 cursor-pointer"
+              className="cursor-pointer group"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <div className="flex items-center space-x-2 group">
-                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/70 rounded-md flex items-center justify-center transition-all duration-300 group-hover:scale-[1.2] group-hover:rotate-12 group-hover:shadow-lg">
-                  <div className="w-2 h-2 bg-primary-foreground rounded-sm transition-all duration-300 group-hover:scale-125"></div>
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/70 rounded-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-[20deg] group-hover:shadow-xl group-hover:shadow-primary/30 animate-logo-pulse">
+                  <div className="w-2 h-2 bg-primary-foreground rounded-sm transition-all duration-500 group-hover:scale-125 group-hover:rotate-45"></div>
                 </div>
-                <span className="text-base font-medium text-foreground tracking-tight transition-all duration-300 group-hover:text-primary group-hover:scale-105">
+                <span className="text-base font-medium text-primary/50 tracking-tight transition-all duration-500 group-hover:text-primary group-hover:scale-105 group-hover:tracking-wide animate-text-pulse">
                   Future Web
                 </span>
               </div>
             </div>
           </div>
           
-          {/* Navigation Links - Hidden on mobile, shown on md+ */}
-          <div className="hidden md:flex justify-center flex-1 mx-8">
-            <div className="flex items-center justify-center space-x-1">
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`
-                    relative px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium cursor-pointer
-                    hover:bg-gradient-to-br hover:from-primary/10 hover:to-primary/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10
-                    ${activeSection === item.id 
-                      ? 'text-primary bg-gradient-to-br from-primary/8 to-primary/12 shadow-sm border border-primary/20' 
-                      : 'text-muted-foreground hover:text-primary hover:scale-105'
-                    }
-                  `}
-                >
-                  {/* Active section indicator */}
-                  {activeSection === item.id && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-lg -z-10 animate-pulse"></div>
-                  )}
-                  
-                  {item.label}
-                  
-                  {/* Active section bottom border */}
-                  {activeSection === item.id && (
-                    <div 
-                      className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary/70 rounded-full"
-                      style={{
-                        bottom: '-2px',
-                        width: '60%',
-                        height: '2px'
-                      }}
-                    ></div>
-                  )}
-                </a>
-              ))}
+          {/* Navigation Links - Always visible on desktop/laptop, smaller text on tablets */}
+          {!isMobile && (
+            <div className="flex-1 flex justify-center">
+              <div className="flex items-center space-x-1">
+                {navItems.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`
+                      relative px-2 lg:px-3 py-2 rounded-lg transition-all duration-300 text-xs lg:text-sm font-medium cursor-pointer
+                      hover:bg-gradient-to-br hover:from-primary/10 hover:to-primary/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10
+                      ${activeSection === item.id 
+                        ? 'text-primary bg-gradient-to-br from-primary/8 to-primary/12 shadow-sm border border-primary/20' 
+                        : 'text-muted-foreground hover:text-primary hover:scale-105'
+                      }
+                    `}
+                  >
+                    {/* Active section indicator */}
+                    {activeSection === item.id && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-lg -z-10 animate-pulse"></div>
+                    )}
+                    
+                    {item.label}
+                    
+                    {/* Active section bottom border */}
+                    {activeSection === item.id && (
+                      <div 
+                        className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary/70 rounded-full"
+                        style={{
+                          bottom: '-2px',
+                          width: '60%',
+                          height: '2px'
+                        }}
+                      ></div>
+                    )}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           
-          {/* Right side buttons - Language, Theme and CTA */}
-          <div className={`flex items-center justify-end flex-shrink-0 ${isRTL ? 'space-x-reverse space-x-1' : 'space-x-1'}`}>
-            {/* Language Toggle - Hidden only on smallest screens */}
-            <div className="hidden sm:block">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-                className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:text-primary hover:shadow-sm group h-7 rounded-md border border-transparent hover:border-primary/20"
-              >
-                <Globe className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
-                <div className="flex items-center space-x-0.5">
-                  <span className={`transition-all duration-300 text-xs ${language === 'ar' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
-                    ع
-                  </span>
-                  <span className="text-muted-foreground/40 text-xs">|</span>
-                  <span className={`transition-all duration-300 text-xs ${language === 'en' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
-                    EN
-                  </span>
-                </div>
-              </Button>
-            </div>
+          {/* Right side buttons - Always visible, responsive sizing */}
+          <div className="flex items-center space-x-1 flex-shrink-0">
+            {/* Language Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+              className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:text-primary hover:shadow-sm group h-7 rounded-md border border-transparent hover:border-primary/20"
+            >
+              <Globe className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+              <div className="flex items-center space-x-0.5 hidden sm:flex">
+                <span className={`transition-all duration-300 text-xs ${language === 'ar' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
+                  ع
+                </span>
+                <span className="text-muted-foreground/40 text-xs">|</span>
+                <span className={`transition-all duration-300 text-xs ${language === 'en' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
+                  EN
+                </span>
+              </div>
+            </Button>
 
-            {/* Theme Selector - Visible on all screens */}
+            {/* Theme Selector */}
             <div className="relative">
-              <div className={isMobile ? '' : 'group'}>
+              <div className="group">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -339,17 +317,15 @@ export default function Navbar() {
                   onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
                   className="flex items-center space-x-1.5 px-2 py-1 text-xs font-medium cursor-pointer hover:bg-primary/10 active:bg-primary/10 transition-all duration-300 hover:text-primary active:text-primary hover:shadow-sm active:shadow-sm h-7 rounded-md border border-transparent hover:border-primary/20 active:border-primary/20"
                 >
-                  <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 group-active:scale-110 group-active:rotate-12" />
-                  <span className="text-xs">{language === 'ar' ? 'المظهر' : 'Theme'}</span>
+                  <Palette className="w-3 h-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                  <span className="text-xs hidden md:inline">{language === 'ar' ? 'المظهر' : 'Theme'}</span>
                 </Button>
                 
                 {/* Theme Dropdown */}
                 <div 
                   data-theme-dropdown
                   className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-background/95 backdrop-blur-md border border-border/50 rounded-lg shadow-lg transition-all duration-300 transform z-50 ${
-                    isMobile
-                      ? (isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2')
-                      : 'opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0'
+                    isThemeDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'
                   }`}
                 >
                   <div className="p-3 space-y-2">
@@ -363,8 +339,7 @@ export default function Navbar() {
                         className={`
                           w-full flex items-center justify-between p-2 rounded-md transition-all duration-300 cursor-pointer
                           hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:scale-102 hover:shadow-sm hover:shadow-primary/5
-                          active:bg-gradient-to-r active:from-primary/10 active:to-primary/5 active:scale-102 active:shadow-sm active:shadow-primary/5
-                          ${currentTheme === theme.id ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary shadow-sm' : 'hover:text-primary active:text-primary'}
+                          ${currentTheme === theme.id ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary shadow-sm' : 'hover:text-primary'}
                         `}
                       >
                         <span className="text-xs font-medium">
@@ -393,108 +368,58 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Dark Mode Toggle - Hidden only on smallest screens */}
-            <div className="hidden sm:block">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleDarkMode}
-                className="p-1.5 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm hover:scale-105 hover:text-primary h-7 w-7 rounded-md border border-transparent hover:border-primary/20 group"
-              >
-                <div className="relative w-3 h-3">
-                  <Sun className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:rotate-12 ${isDarkMode ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
-                  <Moon className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:-rotate-12 ${isDarkMode ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
-                </div>
-              </Button>
-            </div>
-
-            {/* Contact Us Button */}
+            {/* Dark Mode Toggle */}
             <Button
+              variant="ghost"
               size="sm"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-3 py-1 h-7 text-xs font-medium cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground hover:scale-105 hover:shadow-md hover:shadow-primary/20 transition-all duration-300 rounded-md border border-primary/20 hover:border-primary/40"
+              onClick={toggleDarkMode}
+              className="p-1.5 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm hover:scale-105 hover:text-primary h-7 w-7 rounded-md border border-transparent hover:border-primary/20 group"
             >
-              {language === 'ar' ? 'تواصل معنا' : 'Contact'}
+              <div className="relative w-3 h-3">
+                <Sun className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:rotate-12 ${isDarkMode ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+                <Moon className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:-rotate-12 ${isDarkMode ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
+              </div>
             </Button>
-
-
             
-            {/* Mobile menu button - Always visible on mobile */}
-            <div className="md:hidden ml-2">
+            {/* Mobile menu button - Only show on tablets and phones */}
+            {isMobile && (
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="p-1.5 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm hover:scale-105 hover:text-primary h-7 w-7 rounded-md border border-transparent hover:border-primary/20 group"
+                className="p-1.5 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm hover:scale-105 hover:text-primary h-7 w-7 rounded-md border border-transparent hover:border-primary/20 group ml-1"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 <Menu className={`w-3.5 h-3.5 transition-all duration-300 group-hover:scale-110 ${isMobileMenuOpen ? 'rotate-90' : ''}`} />
               </Button>
-            </div>
+            )}
           </div>
         </div>
       </div>
       
-      {/* Mobile Navigation Menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-background/95 backdrop-blur-md border-b border-border/50`}>
-        <div className="px-4 py-4 space-y-2">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`
-                block px-4 py-3 rounded-lg transition-all duration-300 text-sm font-semibold cursor-pointer
-                hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:translate-x-2 hover:shadow-md hover:shadow-primary/5
-                ${activeSection === item.id 
-                  ? 'text-foreground bg-gradient-to-r from-primary/15 to-primary/10 border-l-4 border-primary shadow-sm' 
-                  : 'text-muted-foreground hover:text-primary hover:border-l-2 hover:border-primary/30'
-                }
-              `}
-            >
-              {item.label}
-            </a>
-          ))}
-          
-          {/* Mobile-only buttons for very small screens */}
-          <div className="sm:hidden pt-3 border-t border-border/20 space-y-2">
-            <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-1.5' : 'space-x-1.5'}`}>
-              {/* Mobile Language Toggle */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-                className="flex-1 flex items-center justify-center space-x-1.5 p-2 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm h-8 rounded-md border border-transparent hover:border-primary/20 group"
+      {/* Mobile Navigation Menu - Only navigation items, no controls */}
+      {isMobile && (
+        <div className={`transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-background/95 backdrop-blur-md border-b border-border/50`}>
+          <div className="px-4 py-4 space-y-2">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`
+                  block px-4 py-3 rounded-lg transition-all duration-300 text-sm font-semibold cursor-pointer
+                  hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:translate-x-2 hover:shadow-md hover:shadow-primary/5
+                  ${activeSection === item.id 
+                    ? 'text-foreground bg-gradient-to-r from-primary/15 to-primary/10 border-l-4 border-primary shadow-sm' 
+                    : 'text-muted-foreground hover:text-primary hover:border-l-2 hover:border-primary/30'
+                  }
+                `}
               >
-                <Globe className="w-3 h-3 transition-all duration-300 group-hover:scale-110" />
-                <div className="flex items-center space-x-0.5">
-                  <span className={`transition-all duration-300 text-xs ${language === 'ar' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
-                    ع
-                  </span>
-                  <span className="text-muted-foreground/40 text-xs">|</span>
-                  <span className={`transition-all duration-300 text-xs ${language === 'en' ? 'text-primary font-semibold' : 'text-muted-foreground group-hover:text-foreground'}`}>
-                    EN
-                  </span>
-                </div>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleDarkMode}
-                className="flex-1 flex items-center justify-center space-x-1.5 p-2 cursor-pointer hover:bg-primary/10 transition-all duration-300 hover:shadow-sm h-8 rounded-md border border-transparent hover:border-primary/20 group"
-              >
-                <div className="relative w-3 h-3">
-                  <Sun className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:rotate-12 ${isDarkMode ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
-                  <Moon className={`absolute inset-0 w-3 h-3 transition-all duration-500 group-hover:-rotate-12 ${isDarkMode ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
-                </div>
-                <span className="text-xs font-medium">
-                  {language === 'ar' ? (isDarkMode ? 'فاتح' : 'داكن') : (isDarkMode ? 'Light' : 'Dark')}
-                </span>
-              </Button>
-            </div>
-
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
