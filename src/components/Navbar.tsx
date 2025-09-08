@@ -224,7 +224,26 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-1 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+    <>
+      <style>
+        {`
+          @keyframes logoInfinity {
+            0% {
+              transform: scale(0.8) rotate(-4deg);
+            }
+            50% {
+              transform: scale(1.2) rotate(4deg);
+            }
+            100% {
+              transform: scale(0.8) rotate(-4deg);
+            }
+          }
+          .animate-logo-infinity {
+            animation: logoInfinity 3s ease-in-out infinite;
+          }
+        `}
+      </style>
+      <nav className="fixed top-1 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
       <div className="w-full px-4 sm:px-6">
         <div className="flex items-center h-16">
           {/* Logo - Fixed to left edge */}
@@ -233,11 +252,11 @@ export default function Navbar() {
               className="cursor-pointer group"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/70 rounded-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-[20deg] group-hover:shadow-xl group-hover:shadow-primary/30 animate-logo-pulse">
+              <div className="flex items-center space-x-2 animate-logo-infinity">
+                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/70 rounded-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-[20deg] group-hover:shadow-xl group-hover:shadow-primary/30">
                   <div className="w-2 h-2 bg-primary-foreground rounded-sm transition-all duration-500 group-hover:scale-125 group-hover:rotate-45"></div>
                 </div>
-                <span className="text-base font-medium text-primary/50 tracking-tight transition-all duration-500 group-hover:text-primary group-hover:scale-105 group-hover:tracking-wide animate-text-pulse">
+                <span className="text-base font-medium text-primary/50 tracking-tight transition-all duration-500 group-hover:text-primary group-hover:scale-105 group-hover:tracking-wide">
                   Future Web
                 </span>
               </div>
@@ -421,5 +440,6 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+    </>
   );
 }

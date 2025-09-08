@@ -30,21 +30,21 @@ export default function TemplatesShowcase() {
       image: "/images/tourist.png",
       techStack: ["Next.js", "Node.js", "MongoDB"],
       color: "from-blue-500 to-cyan-400",
-      preview: "#",
+      preview: "https://tourist-agency-zeta.vercel.app/",
       features: language === 'ar' ? ["حجوزات فورية", "عروض حصرية", "دعم متعدد اللغات"] : ["Instant Booking", "Exclusive Deals", "Multi-language Support"]
     },
     {
       id: 3,
-      title: language === 'ar' ? "منصة عرض التطبيقات" : "Mobile App Showcase Platform",
-      subtitle: language === 'ar' ? "صفحة تطبيق" : "App Showcase",
+      title: language === 'ar' ? "موقع عقاري احترافي" : "Professional Real Estate Website",
+      subtitle: language === 'ar' ? "عرض العقارات" : "Property Showcase",
       description: language === 'ar'
-        ? "منصة عرض احترافية للتطبيقات المحمولة مع واجهة تفاعلية وإمكانيات تحميل متقدمة لزيادة معدلات التحويل"
-        : "Professional mobile application showcase platform with interactive interface and advanced download capabilities designed to maximize conversion rates",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
+        ? "موقع عقاري احترافي مع واجهة تفاعلية وإمكانيات بحث متقدمة في العقارات لزيادة المبيعات والإيجارات"
+        : "Professional real estate website with interactive interface and advanced property search capabilities designed to maximize sales and rentals",
+      image: "/images/reasEstate.png",
       techStack: ["Next.js", "Tailwind", "Framer"],
-      color: "from-emerald-500 to-teal-400",
-      preview: "https://app-landing-demo.com",
-      features: language === 'ar' ? ["واجهة تفاعلية متطورة", "روابط تحميل ذكية", "معاينة تطبيق ديناميكية"] : ["Advanced Interactive Interface", "Smart Download Integration", "Dynamic App Preview System"]
+      color: "from-blue-500 to-indigo-400",
+      preview: "https://real-estate-plum-ten.vercel.app/",
+      features: language === 'ar' ? ["بحث متقدم في العقارات", "جولات افتراضية", "قوائم ديناميكية"] : ["Advanced Property Search", "Virtual Tours", "Dynamic Listings"]
     }
   ];
 
