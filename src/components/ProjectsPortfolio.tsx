@@ -27,100 +27,106 @@ export default function ProjectsPortfolio() {
       subtitle: "نماذج حية من المواقع والتطبيقات التي طورناها لعملائنا، كل مشروع يحكي قصة نجاح مختلفة",
       projects: [
         {
-          title: "متجر الأناقة الرقمي",
-          description: "متجر إلكتروني متكامل للأزياء النسائية مع نظام إدارة متقدم ودفع آمن",
-          category: "متجر إلكتروني",
-          image: "ecommerce fashion",
-          technologies: ["React", "Node.js", "Stripe", "MongoDB"],
-          features: ["دفع آمن", "إدارة المخزون", "تطبيق جوال"],
+          title: "مصنع قوالب حديدية",
+          description: "موقع متكامل لمصنع متخصص في صناعة قوالب الحديد وتصنيع الماكينات الصناعية مع نظام إدارة الطلبات والإنتاج",
+          category: "صناعة وتصنيع",
+          image: "iron molds manufacturing",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["إدارة الطلبات", "تتبع الإنتاج", "نظام المخزون"],
           stats: {
-            visitors: "50K+",
-            sales: "200%+",
-            rating: "4.9"
-          },
-          date: "2024",
-          icon: ShoppingCart,
-          color: "from-pink-500 to-rose-500"
-        },
-        {
-          title: "منصة التعليم الذكية",
-          description: "منصة تعليمية تفاعلية تدعم الفصول الافتراضية والاختبارات الإلكترونية",
-          category: "منصة تعليمية",
-          image: "online learning platform",
-          technologies: ["Vue.js", "Laravel", "WebRTC", "MySQL"],
-          features: ["فصول افتراضية", "اختبارات ذكية", "تقارير تفصيلية"],
-          stats: {
-            visitors: "30K+",
+            visitors: "25K+",
             sales: "150%+",
             rating: "4.8"
           },
           date: "2024",
-          icon: Users,
-          color: "from-blue-500 to-cyan-500"
+          icon: Zap,
+          color: "from-gray-600 to-gray-800",
+          liveUrl: "https://www.mirimolds.com/ar"
         },
         {
-          title: "تطبيق إدارة المطاعم",
-          description: "تطبيق جوال شامل لإدارة المطاعم مع نظام الطلبات والتوصيل المباشر",
-          category: "تطبيق جوال",
-          image: "restaurant management app",
-          technologies: ["React Native", "Firebase", "Stripe", "Maps API"],
-          features: ["طلبات فورية", "تتبع التوصيل", "إحصائيات مبيعات"],
-          stats: {
-            visitors: "25K+",
-            sales: "300%+",
-            rating: "4.7"
-          },
-          date: "2024",
-          icon: Smartphone,
-          color: "from-orange-500 to-red-500"
-        },
-        {
-          title: "موقع الشركة الطبية",
-          description: "موقع طبي احترافي مع نظام حجز المواعيد وإدارة ملفات المرضى",
-          category: "موقع طبي",
-          image: "medical website",
-          technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-          features: ["حجز مواعيد", "ملفات المرضى", "تشفير البيانات"],
+          title: "منصة كروت رقمية",
+          description: "منصة متكاملة لإنشاء وإدارة الكروت الرقمية والبطاقات التجارية مع ميزات التخصيص والمشاركة الذكية",
+          category: "خدمات رقمية",
+          image: "digital cards platform",
+          technologies: ["React", "Node.js", "MongoDB", "NFC API"],
+          features: ["تصميم الكروت", "مشاركة فورية", "تحليلات الأداء"],
           stats: {
             visitors: "40K+",
-            sales: "180%+",
-            rating: "5.0"
-          },
-          date: "2024",
-          icon: Shield,
-          color: "from-green-500 to-emerald-500"
-        },
-        {
-          title: "منصة التجارة الإلكترونية",
-          description: "منصة متعددة البائعين مع لوحة تحكم متقدمة وأنظمة دفع متنوعة",
-          category: "منصة تجارية",
-          image: "multi vendor ecommerce",
-          technologies: ["Angular", "Django", "Redis", "PostgreSQL"],
-          features: ["متعدد البائعين", "تحليلات متقدمة", "API شامل"],
-          stats: {
-            visitors: "80K+",
-            sales: "250%+",
+            sales: "200%+",
             rating: "4.9"
           },
           date: "2024",
-          icon: TrendingUp,
-          color: "from-purple-500 to-indigo-500"
+          icon: Smartphone,
+          color: "from-purple-500 to-indigo-500",
+          liveUrl: "https://www.ultratech.top/ar"
         },
         {
-          title: "تطبيق إدارة المشاريع",
-          description: "نظام إدارة مشاريع متطور مع تتبع المهام والتعاون الجماعي المباشر",
-          category: "نظام إدارة",
-          image: "project management system",
-          technologies: ["React", "Express", "Socket.io", "MongoDB"],
-          features: ["تعاون فوري", "تتبع المهام", "تقارير ذكية"],
+          title: "شركة رخام",
+          description: "موقع متكامل لشركة متخصصة في صناعة وتوزيع الرخام مع كتالوج المنتجات ونظام إدارة الطلبات",
+          category: "صناعة وتصنيع",
+          image: "marble company",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["كتالوج المنتجات", "إدارة الطلبات", "عرض المشاريع"],
           stats: {
             visitors: "35K+",
-            sales: "220%+",
+            sales: "180%+",
             rating: "4.8"
           },
           date: "2024",
-          icon: Zap,
-          color: "from-yellow-500 to-amber-500"
+          icon: Shield,
+          color: "from-stone-500 to-stone-700",
+          liveUrl: "https://www.citamermer.com/ar"
+        },
+        {
+          title: "شركة الموبيليا والمفروشات",
+          description: "موقع متكامل لبيع الموبيليا والمفروشات المنزلية مع كتالوج المنتجات وعربة التسوق الإلكترونية",
+          category: "بيع بالتجزئة",
+          image: "furniture retail",
+          technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+          features: ["كتالوج المنتجات", "عربة التسوق", "تتبع التوصيل"],
+          stats: {
+            visitors: "45K+",
+            sales: "220%+",
+            rating: "4.6"
+          },
+          date: "2024",
+          icon: ShoppingCart,
+          color: "from-amber-500 to-orange-500",
+          liveUrl: "https://nabhan-furniture-git-main-maher9393267111s-projects.vercel.app/ar"
+        },
+        {
+          title: "شركة صناعة الرخام والأحجار الطبيعية",
+          description: "موقع متكامل لشركة متخصصة في صناعة الرخام والأحجار الطبيعية مع كتالوج المنتجات ونظام إدارة الطلبات",
+          category: "صناعة وتصنيع",
+          image: "marble stones manufacturing",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["كتالوج المنتجات", "إدارة الطلبات", "عرض المشاريع"],
+          stats: {
+            visitors: "50K+",
+            sales: "200%+",
+            rating: "4.8"
+          },
+          date: "2024",
+          icon: Shield,
+          color: "from-stone-600 to-stone-800",
+          liveUrl: "https://www.tedilimermer.com/ar/gallery"
+        },
+        {
+          title: "موقع الشركة",
+          description: "موقع متكامل لشركة الويب يعرض خدماتنا ومعرض أعمالنا مع نظام إدارة المحتوى والتسويق الرقمي",
+          category: "موقع شركة",
+          image: "agency website",
+          technologies: ["React", "Next.js", "Node.js", "MongoDB"],
+          features: ["معرض الأعمال", "إدارة المحتوى", "التسويق الرقمي"],
+          stats: {
+            visitors: "100K+",
+            sales: "300%+",
+            rating: "5.0"
+          },
+          date: "2024",
+          icon: Globe,
+          color: "from-primary to-primary/70",
+          liveUrl: "websites-agency.vercel.app"
         }
       ],
       viewProject: "مشاهدة المشروع",
@@ -133,100 +139,106 @@ export default function ProjectsPortfolio() {
       subtitle: "Live examples of websites and applications we've developed for our clients, each project tells a different success story",
       projects: [
         {
-          title: "Digital Elegance Store",
-          description: "Complete e-commerce store for women's fashion with advanced management system and secure payment",
-          category: "E-commerce Store",
-          image: "ecommerce fashion",
-          technologies: ["React", "Node.js", "Stripe", "MongoDB"],
-          features: ["Secure Payment", "Inventory Management", "Mobile App"],
+          title: "Iron Molds Manufacturing",
+          description: "Comprehensive website for a specialized factory in iron molds manufacturing and industrial machinery with order management and production tracking system",
+          category: "Manufacturing",
+          image: "iron molds manufacturing",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["Order Management", "Production Tracking", "Inventory System"],
           stats: {
-            visitors: "50K+",
-            sales: "200%+",
-            rating: "4.9"
-          },
-          date: "2024",
-          icon: ShoppingCart,
-          color: "from-pink-500 to-rose-500"
-        },
-        {
-          title: "Smart Learning Platform",
-          description: "Interactive educational platform supporting virtual classrooms and electronic assessments",
-          category: "Educational Platform",
-          image: "online learning platform",
-          technologies: ["Vue.js", "Laravel", "WebRTC", "MySQL"],
-          features: ["Virtual Classes", "Smart Tests", "Detailed Reports"],
-          stats: {
-            visitors: "30K+",
+            visitors: "25K+",
             sales: "150%+",
             rating: "4.8"
           },
           date: "2024",
-          icon: Users,
-          color: "from-blue-500 to-cyan-500"
+          icon: Zap,
+          color: "from-gray-600 to-gray-800",
+          liveUrl: "https://www.mirimolds.com/ar"
         },
         {
-          title: "Restaurant Management App",
-          description: "Comprehensive mobile app for restaurant management with ordering and direct delivery system",
-          category: "Mobile App",
-          image: "restaurant management app",
-          technologies: ["React Native", "Firebase", "Stripe", "Maps API"],
-          features: ["Instant Orders", "Delivery Tracking", "Sales Analytics"],
-          stats: {
-            visitors: "25K+",
-            sales: "300%+",
-            rating: "4.7"
-          },
-          date: "2024",
-          icon: Smartphone,
-          color: "from-orange-500 to-red-500"
-        },
-        {
-          title: "Medical Company Website",
-          description: "Professional medical website with appointment booking system and patient file management",
-          category: "Medical Website",
-          image: "medical website",
-          technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-          features: ["Appointment Booking", "Patient Files", "Data Encryption"],
+          title: "Digital Cards Platform",
+          description: "Comprehensive platform for creating and managing digital cards and business cards with customization and smart sharing features",
+          category: "Digital Services",
+          image: "digital cards platform",
+          technologies: ["React", "Node.js", "MongoDB", "NFC API"],
+          features: ["Card Design", "Instant Sharing", "Performance Analytics"],
           stats: {
             visitors: "40K+",
-            sales: "180%+",
-            rating: "5.0"
-          },
-          date: "2024",
-          icon: Shield,
-          color: "from-green-500 to-emerald-500"
-        },
-        {
-          title: "E-commerce Platform",
-          description: "Multi-vendor platform with advanced control panel and diverse payment systems",
-          category: "Commercial Platform",
-          image: "multi vendor ecommerce",
-          technologies: ["Angular", "Django", "Redis", "PostgreSQL"],
-          features: ["Multi-vendor", "Advanced Analytics", "Comprehensive API"],
-          stats: {
-            visitors: "80K+",
-            sales: "250%+",
+            sales: "200%+",
             rating: "4.9"
           },
           date: "2024",
-          icon: TrendingUp,
-          color: "from-purple-500 to-indigo-500"
+          icon: Smartphone,
+          color: "from-purple-500 to-indigo-500",
+          liveUrl: "https://www.ultratech.top/ar"
         },
         {
-          title: "Project Management App",
-          description: "Advanced project management system with task tracking and direct team collaboration",
-          category: "Management System",
-          image: "project management system",
-          technologies: ["React", "Express", "Socket.io", "MongoDB"],
-          features: ["Real-time Collaboration", "Task Tracking", "Smart Reports"],
+          title: "Marble Company",
+          description: "Comprehensive website for a specialized company in marble production and distribution with product catalog and order management system",
+          category: "Manufacturing",
+          image: "marble company",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["Product Catalog", "Order Management", "Project Showcase"],
           stats: {
             visitors: "35K+",
-            sales: "220%+",
+            sales: "180%+",
             rating: "4.8"
           },
           date: "2024",
-          icon: Zap,
-          color: "from-yellow-500 to-amber-500"
+          icon: Shield,
+          color: "from-stone-500 to-stone-700",
+          liveUrl: "https://www.citamermer.com/ar"
+        },
+        {
+          title: "Furniture & Furnishings Company",
+          description: "Comprehensive website for selling furniture and home furnishings with product catalog and online shopping cart",
+          category: "Retail",
+          image: "furniture retail",
+          technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+          features: ["Product Catalog", "Shopping Cart", "Delivery Tracking"],
+          stats: {
+            visitors: "45K+",
+            sales: "220%+",
+            rating: "4.6"
+          },
+          date: "2024",
+          icon: ShoppingCart,
+          color: "from-amber-500 to-orange-500",
+          liveUrl: "https://nabhan-furniture-git-main-maher9393267111s-projects.vercel.app/ar"
+        },
+        {
+          title: "Marble & Natural Stones Manufacturing",
+          description: "Comprehensive website for a specialized company in marble and natural stones manufacturing with product catalog and order management system",
+          category: "Manufacturing",
+          image: "marble stones manufacturing",
+          technologies: ["React", "Node.js", "MongoDB", "Express"],
+          features: ["Product Catalog", "Order Management", "Project Showcase"],
+          stats: {
+            visitors: "50K+",
+            sales: "200%+",
+            rating: "4.8"
+          },
+          date: "2024",
+          icon: Shield,
+          color: "from-stone-600 to-stone-800",
+          liveUrl: "https://www.tedilimermer.com/ar/gallery"
+        },
+        {
+          title: "Company Website",
+          description: "Comprehensive website for our web agency showcasing our services and portfolio with content management and digital marketing systems",
+          category: "Company Website",
+          image: "agency website",
+          technologies: ["React", "Next.js", "Node.js", "MongoDB"],
+          features: ["Portfolio Showcase", "Content Management", "Digital Marketing"],
+          stats: {
+            visitors: "100K+",
+            sales: "300%+",
+            rating: "5.0"
+          },
+          date: "2024",
+          icon: Globe,
+          color: "from-primary to-primary/70",
+          liveUrl: "websites-agency.vercel.app"
         }
       ],
       viewProject: "View Project",
@@ -283,9 +295,9 @@ export default function ProjectsPortfolio() {
                     src={
                       index === 0 ? "https://images.unsplash.com/photo-1642142785744-261a5f663d12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBlY29tbWVyY2UlMjB3ZWJzaXRlfGVufDF8fHx8MTc1Njk4MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
                       index === 1 ? "https://images.unsplash.com/photo-1588912914074-b93851ff14b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZyUyMHBsYXRmb3JtfGVufDF8fHx8MTc1NzA1ODQwNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 2 ? "https://images.unsplash.com/photo-1560125738-21281f9d9b27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwbW9iaWxlJTIwYXBwfGVufDF8fHx8MTc1NzA1ODQxMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 3 ? "https://images.unsplash.com/photo-1747224317356-6dd1a4a078fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwd2Vic2l0ZSUyMGludGVyZmFjZXxlbnwxfHx8fDE3NTcwNTg0MTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
-                      index === 4 ? "https://images.unsplash.com/photo-1629963918958-1b62cfe3fe92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzU3MDM4MzkzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
+                      index === 2 ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJibGUlMjBzdG9uZXxlbnwxfHx8fDE3NTcwNTg0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
+                      index === 3 ? "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwaG9tZSUyMGZ1cm5pc2hpbmdzfGVufDF8fHx8MTc1NzA1ODQxNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
+                      index === 4 ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJibGUlMjBzdG9uZXxlbnwxfHx8fDE3NTcwNTg0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" :
                       "https://images.unsplash.com/photo-1558092535-648ec3c50158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMGRhc2hib2FyZHxlbnwxfHx8fDE3NTcwNTgzMjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                     }
                     alt={project.title}
@@ -367,10 +379,12 @@ export default function ProjectsPortfolio() {
 
                   {/* CTA Buttons */}
                   <div className="flex gap-2">
-                    <button className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 hover:scale-105 transition-all duration-300 text-sm">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <button  className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 hover:scale-105 transition-all duration-300 text-sm">
                       <span>{currentContent.viewProject}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
+                    </a>
                   </div>
                 </div>
 

@@ -36,7 +36,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '4 مطورين' : '4 Developers',
       rating: 4.9,
       views: '2.5K',
-      liveUrl: '#',
+      liveUrl: 'https://www.mirimolds.com/ar',
       githubUrl: '#'
     },
     {
@@ -52,7 +52,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '3 مطورين' : '3 Developers',
       rating: 4.8,
       views: '1.8K',
-      liveUrl: '#',
+      liveUrl: 'https://www.ultratech.top/ar',
       githubUrl: '#'
     },
     {
@@ -68,7 +68,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '5 مطورين' : '5 Developers',
       rating: 5.0,
       views: '3.2K',
-      liveUrl: '#',
+      liveUrl: 'https://www.citamermer.com/ar',
       githubUrl: '#'
     },
     {
@@ -84,7 +84,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '6 مطورين' : '6 Developers',
       rating: 4.7,
       views: '4.1K',
-      liveUrl: '#',
+      liveUrl: 'https://nabhan-furniture-git-main-maher9393267111s-projects.vercel.app/ar',
       githubUrl: '#'
     },
     {
@@ -100,7 +100,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '7 مطورين' : '7 Developers',
       rating: 4.9,
       views: '2.9K',
-      liveUrl: '#',
+      liveUrl: 'https://www.tedilimermer.com/ar/gallery',
       githubUrl: '#'
     },
     {
@@ -116,7 +116,7 @@ export default function ProjectsShowcase() {
       team: language === 'ar' ? '2 مصممين' : '2 Designers',
       rating: 4.8,
       views: '1.5K',
-      liveUrl: '#',
+      liveUrl: 'websites-agency.vercel.app',
       githubUrl: '#'
     }
   ];
