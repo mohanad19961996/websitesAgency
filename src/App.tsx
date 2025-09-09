@@ -50,9 +50,9 @@ function AppContent() {
 
         <SectionDivider variant="dots" />
 
-        <div id="portfolio">
+       {/* <div id="portfolio">
           <ProjectsPortfolio />
-        </div>
+        </div>*/}
 
         <SectionDivider variant="gradient" />
 

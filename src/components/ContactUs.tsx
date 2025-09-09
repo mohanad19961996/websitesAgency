@@ -4,7 +4,6 @@ import { Card } from './ui/card';
 import { 
   Facebook, 
   Linkedin, 
-  MessageCircle,
   ArrowRight,
   Send,
   Globe,
@@ -21,17 +20,6 @@ export default function ContactUs() {
       cta: "دعنا نحول فكرتك إلى واقع رقمي",
       contacts: [
         {
-          platform: "واتساب",
-          title: "محادثة فورية",
-          description: "تواصل مباشر وسريع لمناقشة مشروعك",
-          href: "https://wa.me/1234567890",
-          icon: MessageCircle,
-          bgGradient: "bg-gradient-to-br from-green-500/10 via-green-400/5 to-green-600/10",
-          borderColor: "border-green-500/20 hover:border-green-500/50",
-          iconColor: "text-green-600 dark:text-green-400",
-          accentColor: "green"
-        },
-        {
           platform: "فيسبوك",
           title: "صفحتنا الرسمية",
           description: "تابع آخر أعمالنا وأحدث الأخبار التقنية",
@@ -46,7 +34,7 @@ export default function ContactUs() {
           platform: "لينكد إن",
           title: "الشبكة المهنية",
           description: "تواصل مهني وعرض خبراتنا في التطوير",
-          href: "https://linkedin.com",
+          href: "https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile",
           icon: Linkedin,
           bgGradient: "bg-gradient-to-br from-indigo-500/10 via-indigo-400/5 to-indigo-600/10",
           borderColor: "border-indigo-500/20 hover:border-indigo-500/50",
@@ -60,17 +48,6 @@ export default function ContactUs() {
       subtitle: "Choose your preferred contact method and start your website development journey today",
       cta: "Let us turn your idea into digital reality",
       contacts: [
-        {
-          platform: "WhatsApp",
-          title: "Instant Chat",
-          description: "Direct and quick communication to discuss your project",
-          href: "https://wa.me/1234567890",
-          icon: MessageCircle,
-          bgGradient: "bg-gradient-to-br from-green-500/10 via-green-400/5 to-green-600/10",
-          borderColor: "border-green-500/20 hover:border-green-500/50",
-          iconColor: "text-green-600 dark:text-green-400",
-          accentColor: "green"
-        },
         {
           platform: "Facebook",
           title: "Official Page",
@@ -86,7 +63,7 @@ export default function ContactUs() {
           platform: "LinkedIn",
           title: "Professional Network",
           description: "Professional connection and showcase our development expertise",
-          href: "https://linkedin.com",
+          href: "https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile",
           icon: Linkedin,
           bgGradient: "bg-gradient-to-br from-indigo-500/10 via-indigo-400/5 to-indigo-600/10",
           borderColor: "border-indigo-500/20 hover:border-indigo-500/50",

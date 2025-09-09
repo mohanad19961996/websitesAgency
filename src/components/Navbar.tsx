@@ -191,7 +191,7 @@ export default function Navbar() {
     }
 
     const handleScroll = () => {
-      const sections = ["hero", "problems", "benefits", "services", "portfolio", "gallery", "workflow", "contact"];
+      const sections = ["hero", "problems", "benefits", "services", "templates", "workflow", "contact"];
       const scrollPosition = window.scrollY + 100; // Offset for navbar height
 
       for (const sectionId of sections) {
@@ -211,6 +211,7 @@ export default function Navbar() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+    {/* id: "portfolio", label: language === 'ar' ? "معرض الأعمال" : "Portfolio"*/ }
 
   const navItems = [
     { id: "hero", label: language === 'ar' ? "الرئيسية" : "Home" },
@@ -218,7 +219,6 @@ export default function Navbar() {
     { id: "benefits", label: language === 'ar' ? "المميزات" : "Benefits" },
     { id: "services", label: language === 'ar' ? "خدماتنا" : "Services" },
     { id: "templates", label: language === 'ar' ? "القوالب" : "Templates" },
-    { id: "portfolio", label: language === 'ar' ? "معرض الأعمال" : "Portfolio" },
     { id: "workflow", label: language === 'ar' ? "خطوات العمل" : "Workflow" },
     { id: "contact", label: language === 'ar' ? "اتصل بنا" : "Contact" }
   ];
